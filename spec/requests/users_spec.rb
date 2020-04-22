@@ -18,17 +18,15 @@ RSpec.describe UsersController, type: :request do
     context "when email has already been added" do
       before { post users_path, params: params }
       it "returns an error" do
-        expect do
-          post users_path, params: params
-        end.to raise_exception ActiveRecord::RecordInvalid
+        post users_path, params: params
+        expect(json["errors"][0]["email"]).to include "has already been taken"
       end
     end
 
     context "when email is empty" do
+      before { post users_path, params: {} }
       it "returns an error" do
-        expect do
-          post users_path, params: {}
-        end.to raise_exception ActiveRecord::RecordInvalid
+        expect(json["errors"][0]["email"]).to include "can't be blank"
       end
     end
   end
