@@ -6,23 +6,21 @@ module Error
     def self.included(clazz)
       clazz.class_eval do
         rescue_from ActiveRecord::RecordInvalid do |e|
-          respond_invalid_record(422, e.record.errors)
+          respond(422, e.record.errors)
         end
         rescue_from ActiveRecord::RecordNotUnique do |e|
-          respond(:conflict, 409, e.to_s)
+          respond(:conflict, e.to_s)
+        end
+        rescue_from ActiveRecord::RecordNotFound do |e|
+          respond(:not_found, e.to_s)
         end
       end
     end
 
     private
 
-    def respond(error, status, messages)
-      json = Helpers::Render.json(error, status, messages)
-      render json: json, status: status
-    end
-
-    def respond_invalid_record(status, messages)
-      json = Helpers::Render.json_invalid_record(messages)
+    def respond(status, messages)
+      json = Helpers::Render.json(messages)
       render json: json, status: status
     end
   end
