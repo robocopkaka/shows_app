@@ -12,6 +12,7 @@ class Season < ApplicationRecord
   }
 
   # scopes
+  scope :not_nil, -> { where(deleted_at: nil) }
   scope :descending, -> { order(created_at: :desc) }
 
   # associations

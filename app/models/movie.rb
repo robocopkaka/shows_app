@@ -9,6 +9,7 @@ class Movie < ApplicationRecord
   has_many :variants, as: :showable
 
   #scopes
+  scope :not_nil, -> { where(deleted_at: nil) }
   scope :descending, -> { order(created_at: :desc) }
 
   #hooks

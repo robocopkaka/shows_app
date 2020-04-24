@@ -21,7 +21,7 @@ class MoviesController < ApplicationController
 
   def index
     movies = @cache.fetch("movie_index", expires_in: 1.day) do
-      Movie.descending.to_a
+      Movie.not_nil.descending.to_a
     end
     json_response(object: movies)
   end

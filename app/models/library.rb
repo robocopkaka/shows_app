@@ -11,21 +11,8 @@ class Library < ApplicationRecord
       .order(created_at: :asc)
   }
 
-  #hooks
-  # validate :variant_exists?
+  # validations
   validate :expired?, on: :create
-
-  # adding this for now since I'm not sure if I should prevent
-  # people from buying different variants of the same show.
-  # Can remove if I don't deem necessary
-  def variant_exists?
-    shows = user.variants.map { |show| [show.showable.id, show.showable_type] }
-    show = [variant.showable.id, variant.showable_type]
-
-    return unless show.in?(shows)
-
-    errors.add(:variant, "You already have a variant of this show")
-  end
 
   def expired?
     show = user.libraries.where(variant_id: variant_id).last

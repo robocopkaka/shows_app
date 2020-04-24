@@ -20,7 +20,7 @@ class SeasonsController < ApplicationController
 
   def index
     seasons = @cache.fetch("season_index", expires_in: 1.day) do
-      Season.includes(:episodes).descending.to_a
+      Season.includes(:episodes).not_nil.descending.to_a
     end
     json_response(object: seasons)
   end
