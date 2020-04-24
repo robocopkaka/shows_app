@@ -29,23 +29,23 @@
 
 ## Endpoints
 ### Key Endpoints
-* Add show to library - `POST http://localhost:3000/users/:user_id/libraries`
+* Add show to library - `POST http://localhost:3000/users/:user_id/libraries`. Parameters - `{variant_id: variant_id}`
 * Return all shows in a user's library - `GET http://localhost:3000/users/:user_id/libraries`
 * Return all movies and seasons - `GET http://localhost:3000/all_shows`
 * Endpoint to return movies - `GET http://localhost:3000/movies`
 * Endpoint to return seasons with their episodes: `GET http://localhost:3000/seasons`
 
 ### Other Endpoints
-* Endpoint to create users - `POST http://localhost:3000/users`
-* Endpoint to create movies - `POST http://localhost:3000/movies`
-* Endpoint to update movies - `PATCH http://localhost:3000/movies/:id`
+* Endpoint to create users - `POST http://localhost:3000/users`. Parameters - `{email: email}`
+* Endpoint to create movies - `POST http://localhost:3000/movies`. Parameters - `{plot: plot, title: title}`
+* Endpoint to update movies - `PATCH http://localhost:3000/movies/:id`. Parameters - `{plot: plot, title: title}`
 * Endpoint to delete movies - `DELETE http://localhost:3000/movies/:id`
 * Endpoint to fetch a single movie - `GET http://localhost:3000/movies/:id`
-* Endpoint to create seasons - `POST http://localhost:3000/seasons`
-* Endpoint to update seasons - `PATCH http://localhost:3000/seasons/:id`
+* Endpoint to create seasons - `POST http://localhost:3000/seasons`. Parameters - `{plot: plot, title: title, number: number, episodes_attributes: { plot, title: title, number: number }}`
+* Endpoint to update seasons - `PATCH http://localhost:3000/seasons/:id`. Parameters - `{plot: plot, title: title, number: number}`
 * Endpoint to delete seasons - `DELETE http://localhost:3000/seasons/:id`
 * Endpoint to retrieve a single season - `GET http://localhost:3000/seasons/:id`
-* Endpoint to update episodes - `PATCH http://localhost:3000/seasons/:season_id/episodes/:id`
+* Endpoint to update episodes - `PATCH http://localhost:3000/seasons/:season_id/episodes/:id`. Parameters - `{plot: plot, title: title, number: number}`
 * Endpoint to delete episodes - `DELETE http://localhost:3000/seasons/:season_id/episodes/:id`
 * Endpoint to fetch a single episode - `GET http://localhost:3000/seasons/:season_id/episodes/:id`
 
