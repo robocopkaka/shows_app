@@ -20,7 +20,7 @@ class MoviesController < ApplicationController
   end
 
   def index
-    movies = @cache.fetch("movie_index", expires_in: 10.minute) do
+    movies = @cache.fetch("movie_index", expires_in: 1.day) do
       Movie.descending.to_a
     end
     json_response(object: movies)
@@ -48,5 +48,6 @@ class MoviesController < ApplicationController
 
   def invalidate_index_cache
     invalidate_cache("movie_index")
+    invalidate_cache("all_shows")
   end
 end
