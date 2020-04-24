@@ -8,9 +8,6 @@ module Error
         rescue_from ActiveRecord::RecordInvalid do |e|
           respond(422, e.record.errors)
         end
-        rescue_from ActiveRecord::RecordNotUnique do |e|
-          respond(:conflict, e.to_s)
-        end
         rescue_from ActiveRecord::RecordNotFound do |e|
           respond(:not_found, e.to_s)
         end

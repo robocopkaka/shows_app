@@ -22,6 +22,8 @@
 
 ## Tests
 * Run `rspec spec` to run all the tests
+* Run `open coverage/index.html` if you're using a Mac or `xdg-open coverage/index.html` if you're using a Debian/Ubuntu setup to show the coverage report
+* If on Windows or other operating systems, go to the `coverage` folder in the root directory, which is generated the first time tests are run, and open the `index.html` file in your browser
 
 ## Endpoints
 ### Key Endpoints
@@ -55,4 +57,5 @@
 ## Things I couldn't finish
 * Setting up a relationship between `variants` and `episodes`
 * Preventing users from buying multiple variants of the same show. I wasn't sure of the best approach to take regarding this and left it as is.
+* Setting up pagination
 
