@@ -43,7 +43,7 @@ class EpisodesController < ApplicationController
     params.permit(:plot, :title, :number)
   end
 
-  # doing this since I'm currently doing soft deletes for show resources
+  # doing this since I'm currently doing soft deletes for show all_shows
   def verify_season
     find_season
     return if @season.deleted_at.nil?
