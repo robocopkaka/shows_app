@@ -64,4 +64,6 @@ RSpec.configure do |config|
 
   # add helper for request specs
   config.include RequestSpecHelper, type: :request
+
+  config.include RSpec::RedisHelper, redis: true
 end

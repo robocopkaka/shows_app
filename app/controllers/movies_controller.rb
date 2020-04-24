@@ -2,7 +2,10 @@
 
 # movies controller
 class MoviesController < ApplicationController
+  before_action :initialize_cache
+  after_action :invalidate_index_cache, only: %i[create update destroy]
   before_action :find_movie, only: %i[show update destroy]
+
   def create
     movie = Movie.create!(movie_params)
     json_response(
@@ -17,7 +20,9 @@ class MoviesController < ApplicationController
   end
 
   def index
-    movies = Movie.descending
+    movies = @cache.fetch("movie_index", expires_in: 1.day) do
+      Movie.descending.to_a
+    end
     json_response(object: movies)
   end
 
@@ -39,5 +44,10 @@ class MoviesController < ApplicationController
 
   def find_movie
     @movie = Movie.find_by!(id: params[:id])
+  end
+
+  def invalidate_index_cache
+    invalidate_cache("movie_index")
+    invalidate_cache("all_shows")
   end
 end
