@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   resources :seasons, except: %i[new edit] do
     resources :episodes, except: %i[new edit]
   end
+  resources :all_shows, only: %i[index]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
