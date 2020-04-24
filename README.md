@@ -10,6 +10,7 @@
 ## Installation Steps
 * Clone this repo
 * `cd` into the repo
+* run `bundle install` to install dependencies
 * Run `rails credentials:edit`
 * Add a key  - `db_user` and a value representing your database username
 * Add a key - `db_password` and a value representing your database password
