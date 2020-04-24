@@ -2,7 +2,9 @@
 
 # seasons controller
 class SeasonsController < ApplicationController
+  before_action :initialize_cache
   before_action :find_season, only: %i[show update destroy]
+  after_action :invalidate_index_cache, only: %i[create update destroy]
   def create
     season = Season.create!(season_params)
     json_response(
@@ -17,7 +19,9 @@ class SeasonsController < ApplicationController
   end
 
   def index
-    seasons = Season.descending
+    seasons = @cache.fetch("season_index", expires_in: 1.day) do
+      Season.descending.to_a
+    end
     json_response(object: seasons)
   end
 
@@ -46,5 +50,9 @@ class SeasonsController < ApplicationController
 
   def find_season
     @season = Season.find_by!(id: params[:id])
+  end
+
+  def invalidate_index_cache
+    invalidate_cache("season_index")
   end
 end

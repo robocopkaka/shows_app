@@ -2,6 +2,7 @@
 
 # episodes controller
 class EpisodesController < ApplicationController
+  before_action :initialize_cache
   before_action :find_season, only: %i[create]
   before_action :find_episode, only: %i[update show destroy]
   before_action :verify_season
